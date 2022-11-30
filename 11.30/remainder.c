@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int solution(int n) {
+    int answer = 0;
+    int x = 1;
+    //int temp = ;
+    for(int i = x; i <1000000; i++)
+    {    
+        if(n % i == 1)
+        {
+            answer =i;
+            break;
+        }
+    }
+    return answer;
+}

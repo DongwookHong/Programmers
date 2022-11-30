@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,9 +10,9 @@
 // 파라미터로 주어지는 문자열은 const로 주어집니다. 변경하려면 문자열을 복사해서 사용하세요.
 int* solution(const char* id_list[], size_t id_list_len, const char* report[], size_t report_len, int k) {
     // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.
-    int* answer = (int*)malloc(id_list_len);
-    size_t a = 0;
-    size_t cnt[max] = {0,};
+    int* answer = (int*)malloc(id_list_len * sizeof(int));
+    int a = 0;
+    int cnt[max] = {0,};
     char back[max_re]= {0,};
     char front[max_re] ={0,};
     char  find[max][max] ={0,};
@@ -21,24 +21,37 @@ int* solution(const char* id_list[], size_t id_list_len, const char* report[], s
     //char **back[report_len] = {report_pt_2[0], report_pt_2[1]...}
     for(int i =0; i < report_len; i ++)
     {
+        printf("first for %d:\n", i);
         for(int j = 0; report[i][j];j++)
         {
+           // printf("for 1 --- [%d]\n", j);
             if(report[i][j] == ' ') 
+            {
                 a = j +1;
+                break;
+            }
         }
         int j,t;
         for(j = 0; report[i][j] != ' ';j++)
+        {
+            //printf("for 2 --- [%d]\n", j);
             front[j] = report[i][j];
+        }
         front[j] ='\0';
         for(t = 0; report[i][t+a];t++)
+        {
+            //printf("for 4 --- [%d]\n", t);
             back[t] = report[i][a++]; //back[i] = report_pt_space;
+        }
         back[t] = '\0';
         // 포인터로 change 
      
-        for(int j = 0;id_list_len;j++)
+        for(int j = 0;j<id_list_len;j++)
         {
+           
             if(strcmp(id_list[j],back)== 0) 
-                cnt[i]++;//  back. 이랑 비교해줘서 신고당한사람 수 확인하기 
+                cnt[i]++;
+             printf("for 5 --- [%d]\n", cnt[i]);//  back. 이랑 비교해줘서 신고당한사람 수 확인하기 
         }
         
     }
@@ -53,7 +66,7 @@ int* solution(const char* id_list[], size_t id_list_len, const char* report[], s
                     find[i][x]= id_list[i][x];
                 //for(int j = 0; report[i][j]; j++)
                 //{
-                if((strstr(report[i] , front)) && (strstr(report[i], find[i])))  
+                if(((strstr(report[i] , front))) && ((strstr(report[i], find[i]))))  
                     {      
                         for(int k =0; k< id_list_len; k++)
                         {
@@ -93,7 +106,7 @@ int main ()
     int k = 2;
     int* answer = solution(id_list, 4, report, 5, k);
     for(int i = 0; i<5; ++i){
-        printf("%d ", answer[i]);
+       // printf("%d ", answer[i]);
     }
     printf("\n");
     const char* id_list2[] = {"con", "ryan"};
@@ -101,7 +114,7 @@ int main ()
     int k2 = 3;
     int* answer2 = solution(id_list2, 2, report2, 4, k2);
     for(int i = 0; i<4; ++i){
-        printf("%d ", answer2[i]);
+        //printf("%d ", answer2[i]);
     }
     printf("\n");
     return 0;
