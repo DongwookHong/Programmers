@@ -7,5 +7,5 @@ long long solution(int price, int money, int count) {
     long long sum=0;
     while(++i<= count)
          sum += (price * i);
-    return  sum > money ? sum- money :0;
+    return  sum > money ? sum- money :0;// 삼항연산자 활용해보기 
 }
