@@ -80,7 +80,7 @@ int* solution(const char* id_list[], size_t id_list_len,  const char* report[], 
          for(int j = i+1;j < report_len; j++)
         {
             if(report[i] == report[j])
-                report[j] = "abc";
+                report[i] = "1s";
             // if(!(strcmp(id_list[j],back[i])))
             //     cnt[j]++;
            //printf("for 5 --- [%d]\n", cnt[j]);//  back. 이랑 비교해줘서 신고당한사람 수 확인하기 
