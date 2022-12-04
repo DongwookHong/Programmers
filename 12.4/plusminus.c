@@ -11,6 +11,7 @@
 //     //printf("인자 값은 ? %d  \n ",c);
 //     return c;
 // }
+// 다른방법 
 
 int solution(int absolutes[], size_t absolutes_len, bool signs[], size_t signs_len) {
     int answer = 0;
@@ -24,5 +25,7 @@ int solution(int absolutes[], size_t absolutes_len, bool signs[], size_t signs_l
         // absolutes[i] = sign(absolutes[i],signs[i]);
         // answer += absolutes[i];    
     }
-    return answer;
+    return answer; 
 }
+
+// bool  -> 01 만가능 
