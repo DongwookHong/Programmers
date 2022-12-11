@@ -1,6 +1,6 @@
 def solution(s):
     answer =''
-    newSplit = s.split(" ")
+    newSplit = s.split(" ")# 스필릿으로  문자열나눠주기
     for i in range(len(newSplit)):
         new = list(newSplit[i])
         
@@ -9,7 +9,7 @@ def solution(s):
                 new[j] = new[j].upper()
             else :
                 new[j] = new[j].lower()
-        newSplit[i] = "".join(new) #바뀐 문자를 다시 넣어주기
+        newSplit[i] = "".join(new) #바뀐 문자를 다시 넣어주기 
     answer = " ".join(newSplit) # 그 문자로 나온 문열을 띄어쓰기 공백으로 다 하나로 만들어주기
     return answer
 
