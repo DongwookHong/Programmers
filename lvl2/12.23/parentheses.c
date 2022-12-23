@@ -9,18 +9,15 @@ int strtonum(char *str)
     int i =0;
     int cnt=0;
     int sum,sum2,sum3;
-    
-    
+   
     for(int i =0 ; i < strlen(str); i++)
     {
         sum =0;
         sum2=0;
         sum3 =0;
-        int k = i;
         for (int j =0; j <strlen(str);j++)
         {
-           if(k == strlen(str))
-                k=0;
+            int k = (i+j) %strlen(str);  
             if(str[k] == '(')
                 sum +=1;
             else if(str[k] == ')')
@@ -34,12 +31,14 @@ int strtonum(char *str)
             else if(str[k] == ']')
                 sum3 -=3;
             
-            if(sum < 0 || sum2 < 0 || sum3 < 0)
-                break;
+            if(sum < 0 || sum2 < 0 || sum3 < 0) 
+                 break;
             k++;
         }
         
-        if (sum == 0 && sum2 ==0 && sum3 == 0 )
+        if (sum > 0 || sum2 >0 || sum3 > 0 )
+            return 0;
+        if(sum==0 && sum2==0&&sum3==0)
             cnt++;
     }
    return cnt;
