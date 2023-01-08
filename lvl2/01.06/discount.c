@@ -11,7 +11,7 @@ int change_str(char * abc)
 {
     
     int sum =0;
-    for(int i = 0; i < 3; i ++)
+    for(int i = 0; i < strlen(abc); i ++)
     {
         sum += abc[i];
         sum -= 96;
@@ -21,54 +21,52 @@ int change_str(char * abc)
 int solution(const char* want[], size_t want_len, int number[], size_t number_len, const char* discount[], size_t discount_len) 
 {
     int answer = 0;
-    int want_num[100] ={0,};
-    int totalneed[100] = {0,};
+    int want_num[330] ={0,};
+    int totalneed[330] = {0,};
     char * copy;
+    int numsum =0;
+    for(int i= 0; i<number_len;i++)
+    {
+        numsum +=number[i];
+    }
+   
     for(int i =0 ; i< want_len; i++)
     {
         copy = strdup(want[i]);
         want_num[change_str(copy)]++;
         totalneed[change_str(copy)] = want_num[change_str(copy)] * number[i];
-    }
-    int t =0;
-    while(t < 100)
-    {
-        if(totalneed[t] != 0)
-            printf("%d 토탈 필요한값 ... %d\n", t, totalneed[t]);
-        t++;
-    }
    
-    for(int i =0 ; i<=discount_len - 10; i++)
+    }
+    
+   // printf("total ->>>>%d\n",totalneed[k]);
+    for(int i =0 ; i<discount_len; i++)
     {
-       
-        int *disc = (int *)calloc(100,sizeof(int));
+        int cnt =0;
+        int *disc = (int *)calloc(330,sizeof(int));
         
-        for(int j =i ; j < i + 10; j++)
+        int reset =0;
+        for(int j =i ; j < discount_len; j++)
         {
+            if(reset == 10)
+                break;
             copy = strdup(discount[j]);
             disc[change_str(copy)]++;
-        }
-        t =0; 
-        printf("i 의 값은 %d \n",i);
-         while(t < 100)
-        {
-            if( disc[t] != 0)
-                printf(" %d주어진값 ... %d\n",t, disc[t]);
-            t++;
+            reset++;
         }
         int k =0;
-        while(k <= 100)
+        while(k < 330)
         {
-            if(totalneed[k] != 0)
+            if(totalneed[k] != 0 )
             {
-                printf("total %d값은%d\n", k,totalneed[k]);
-                 printf("disc %d값은%d\n", k,disc[k]);
-                if(totalneed[k] <= disc[k])
-                    answer++;
+              if(totalneed[k] <= disc[k])
+              {  
+                  cnt++;
+              }
             }
             k++;
         }
-       
+       if(cnt >= number_len)
+           answer++;
     }
     return answer;
 }
